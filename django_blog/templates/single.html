@@ -1,0 +1,32 @@
+{% comment %}
+
+    Comments goes here
+
+{% endcomment %}
+
+{% include 'header.html' %}
+
+    {% for post in posts %}
+
+        <h1>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </h1>
+        <h3>{{ post.pub_date }}</h3>
+        <h3>By {{ post.author.first_name }} {{ post.author.last_name }}</h3>
+
+        {{ post.text }}
+
+    {% endfor %}
+
+    <br>
+
+    {% if page.has_previous %}
+        <a href="/{{ page.previous_page_number }}">Previous Page</a>
+    {% endif %}
+
+    <br>
+    {% if page.has_next %}
+        <a href="/{{ page.next_page_number }}">Next Page</a>
+    {% endif %}
+
+{% include 'footer.html' %}
