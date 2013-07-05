@@ -5,7 +5,7 @@
 {% endcomment %}
 
 {% include 'header.html' %}
-
+{% load comments %}
     {% for post in posts %}
 
         <h1>
@@ -13,7 +13,18 @@
         </h1>
         <h3>{{ post.pub_date }}</h3>
         <h3>By {{ post.author.first_name }} {{ post.author.last_name }}</h3>
-
+        <h3>Categories: {% for category in post.categories.all %} {{ category.title }}{% endfor %}</h3>
+        {% get_comment_count for post as comment_count %}
+        <h3>Comments: {{ comment_count }}</h3>
+        <ol>
+            {% get_comment_list for post as comments %}
+            {% for comment in comments %}
+                <li>
+                    {{ comment }}
+                </li>
+            {% endfor %}
+        </ol>
+        {% render_comment_form for post %}
         {{ post.text }}
 
     {% endfor %}

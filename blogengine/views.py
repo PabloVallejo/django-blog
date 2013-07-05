@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response
 from blogengine.models import Post, Category
 from django.core.paginator import Paginator, EmptyPage
+from django.template import RequestContext
 
 # Gets the latest posts in the blog
 def get_recent_posts( request ):
