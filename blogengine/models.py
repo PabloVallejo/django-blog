@@ -18,6 +18,8 @@ class Category( models.Model ):
     def get_absolute_url( self ):
         return '/categories/{}'.format( self.slug )
 
+categories = models.ManyToManyField(Category, blank=True, null=True, through='CategoryToPost')
+
 
 # Post model
 class Post( models.Model ):
@@ -26,6 +28,7 @@ class Post( models.Model ):
     text = models.TextField()
     slug = models.SlugField( max_length = 40, unique = True )
     author = models.ForeignKey( User )
+    categories = models.ManyToManyField( Category, blank = True, null = True, through = 'CategoryToPost' )
 
     def __unicode__( self ):
         return self.title

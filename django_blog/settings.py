@@ -125,6 +125,9 @@ INSTALLED_APPS = (
 
     # Flat pages, Like Pages in WordPress
     'django.contrib.flatpages',
+
+    # Comments
+    'django.contrib.comments',
 )
 
 # A sample logging configuration. The only tangible logging

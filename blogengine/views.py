@@ -1,8 +1,7 @@
-
 # Blog engine views
 from django.shortcuts import render_to_response
-from blogengine.models import Post
-from django.core.paginator import Paginator
+from blogengine.models import Post, Category
+from django.core.paginator import Paginator, EmptyPage
 
 # Gets the latest posts in the blog
 def get_recent_posts( request ):
@@ -44,3 +43,32 @@ def get_post( request, post_slug ):
 
     # Display specified post
     return render_to_response( 'single.html', { 'posts': post } )
+
+
+# Get a category
+def get_category( request, category_slug, selected_page = 1 ):
+
+    # Get specified category
+    posts = Post.objects.all().order_by( '-pub_date' )
+    category_posts = []
+
+    for post in posts:
+        if post.categories.filter( slug = category_slug ):
+            category_posts.append( post )
+
+
+    # Add pagination
+    pages = Paginator( category_posts, 5 )
+
+    # Get the category
+    category = Category.objects.filter( slug = category_slug )[ 0 ]
+
+    # Get the specified page
+    try:
+        returned_page = pages.page( selected_page )
+
+    except EmptyPage:
+        returned_page = pages.page( pages.num_pages )
+
+    # Display all the posts
+    return render_to_response( 'category.html', { 'posts': returned_page.object_list, 'page': returned_page, 'category': category })

@@ -20,7 +20,15 @@ urlpatterns = patterns('',
     # Single post by post slug
     url( r'^\d{4}/\d{1,2}/(?P<post_slug>[-a-zA-Z0-9]+)/?$', get_post ),
 
+    # Categories
+    url( r'^categories/(?P<category_slug>\w+)/?$', get_category ),
+    url( r'^categories/(?P<category_slug>\w+)/(?P<selected_page>\d+)/?$', get_category ),
+
+    # Comments
+    url( r'^comments/', include( 'django.contrib.comments.urls' ) ),
+
     # Flat page About
     url( r'', include( 'django.contrib.flatpages.urls' ) ),
+
 
 )
