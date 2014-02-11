@@ -5,7 +5,7 @@ from blogengine.views import *
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns( '',
 
 
     # Uncomment the next line to enable the admin:
@@ -26,6 +26,9 @@ urlpatterns = patterns('',
 
     # Comments
     url( r'^comments/', include( 'django.contrib.comments.urls' ) ),
+
+    # Syndication
+    url( r'^feed/posts/$', PostsFeed() ),
 
     # Flat page About
     url( r'', include( 'django.contrib.flatpages.urls' ) ),

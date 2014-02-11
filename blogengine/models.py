@@ -18,7 +18,7 @@ class Category( models.Model ):
     def get_absolute_url( self ):
         return '/categories/{}'.format( self.slug )
 
-categories = models.ManyToManyField(Category, blank=True, null=True, through='CategoryToPost')
+categories = models.ManyToManyField( Category, blank = True, null = True, through = 'CategoryToPost' )
 
 
 # Post model

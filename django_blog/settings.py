@@ -128,6 +128,9 @@ INSTALLED_APPS = (
 
     # Comments
     'django.contrib.comments',
+
+    # Syndication
+    'django.contrib.syndication',
 )
 
 # A sample logging configuration. The only tangible logging
